@@ -1,0 +1,137 @@
+<nav class="navbar">
+    
+    <!-- NAVIGATION MENU -->
+    <ul class="nav-links">
+
+    
+      <!-- NAVIGATION MENUS -->
+      <div class="menu">
+
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" [routerLink]="['/book-list']">Booklist</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" [routerLink]="['/bookshop-list']">BookShoplist</a>
+        </li>
+
+        
+      </div>
+    </ul>
+  </nav>
+  <mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+     <mat-icon>supervised_user_circle</mat-icon>
+   </button>
+   <span>My App</span>
+   <span class="example-spacer"></span>
+   
+   <button mat-raised-button (click)="openDialog()">Add Book
+    <mat-icon>book</mat-icon>
+  </button>
+ </mat-toolbar>
+  <div class="container">
+    <h2  style="float: left;">{{title}}</h2>
+    
+  </div>
+  
+  <!-- <table class="table tablestriped">
+    <thead>
+      <tr>
+        <th>Book Id</th>
+        <th>Publish Of Year</th>
+        <th>Genre</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Publisher</th> 
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let b of books" >
+        <td> {{ b.book_id }} </td>
+        <td> {{ b.publishYear }} </td>
+        <td> {{ b.genre }} </td>
+        <td> {{ b.title }} </td>
+        <td> {{ b.price }} </td>
+        <td> {{ b.publisher }} </td>
+          <button  class = "btn btn-info" style="margin-left: 10px"> View</button>
+      </tr>
+    </tbody>
+  </table> -->
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  </mat-form-field>
+  
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+  
+      <ng-container matColumnDef="book_id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.book_id}} </td>
+      </ng-container>
+  
+      <!-- Progress Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+        <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+        <td mat-cell *matCellDef="let row"> {{row.price | currency}} </td>
+      </ng-container>
+  
+      <!-- Fruit Column -->
+      <ng-container matColumnDef="publishYear">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Year of Publication </th>
+        <td mat-cell *matCellDef="let row"> {{row.publishYear}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="author">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Author </th>
+        <td mat-cell *matCellDef="let row"> {{row.author}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="genre">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Genre </th>
+        <td mat-cell *matCellDef="let row"> {{row.genre}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="publisher">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Publisher Name </th>
+        <td mat-cell *matCellDef="let row"> {{row.publisher}} </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+        <td mat-cell *matCellDef="let row"> 
+          <button mat-icon-button color="primary" (click)="openDialogtoviewBook(row)">
+            <mat-icon>open_with</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="editProduct(row)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteProduct(row.book_id)">
+            <mat-icon>delete</mat-icon>
+          </button>  
+          
+
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+  
+  

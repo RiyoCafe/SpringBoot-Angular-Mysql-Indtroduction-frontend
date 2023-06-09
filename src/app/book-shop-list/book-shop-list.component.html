@@ -1,0 +1,113 @@
+<nav class="navbar">
+    
+    <!-- NAVIGATION MENU -->
+    <ul class="nav-links">
+
+    
+      <!-- NAVIGATION MENUS -->
+      <div class="menu">
+
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" [routerLink]="['/book-list']">Booklist</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" [routerLink]="['/bookshop-list']">BookShoplist</a>
+        </li>
+        
+      </div>
+    </ul>
+  </nav>
+  <mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+     <mat-icon>supervised_user_circle</mat-icon>
+   </button>
+   <span>My App</span>
+   <span class="example-spacer"></span>
+   
+   <button mat-raised-button (click)="openDialog()">Add BookShop
+    <mat-icon>book</mat-icon>
+  </button>
+ </mat-toolbar>
+  <div class="container">
+    <h2  style="float: left;">{{title}}</h2>
+    
+  </div>
+
+
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  </mat-form-field>
+  
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+  
+      <ng-container matColumnDef="shop_no">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.shop_no}} </td>
+      </ng-container>
+  
+      <!-- Progress Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+        <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+        <td mat-cell *matCellDef="let row"> {{row.price | currency}} </td>
+      </ng-container>
+  
+      <!-- Fruit Column -->
+      <ng-container matColumnDef="publishYear">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Year of Publication </th>
+        <td mat-cell *matCellDef="let row"> {{row.publishYear}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="location">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Location </th>
+        <td mat-cell *matCellDef="let row"> {{row.location}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+        <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="contact_no">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Number </th>
+        <td mat-cell *matCellDef="let row"> {{row.contact_no}} </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+        <td mat-cell *matCellDef="let row"> 
+          <button mat-icon-button color="primary" (click)="addBooksinShop(row.shop_no)">
+            <mat-icon>launch</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="editProduct(row)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteProduct(row.shop_no)">
+            <mat-icon>delete</mat-icon>
+          </button>  
+          
+
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+  

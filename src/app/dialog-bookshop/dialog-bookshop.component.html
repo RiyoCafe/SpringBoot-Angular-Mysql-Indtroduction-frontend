@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Add new BookShop</h1>
+<div mat-dialog-content>
+  <form [formGroup]="productFrom">
+    <mat-form-field appearance="outline">
+      <mat-label>Enter BookShop title</mat-label>
+      <input formControlName="title" matInput placeholder="Placeholder">
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Price</mat-label>
+      <input formControlName="price" matInput placeholder="Placeholder">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Contact no</mat-label>
+      <input formControlName="contact_no" matInput placeholder="Placeholder">
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Location</mat-label>
+      <input formControlName="location" matInput placeholder="Placeholder">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input formControlName="email" matInput placeholder="Placeholder">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Publish Year</mat-label>
+      <mat-select formControlName="publishYear" placeholder="Category">
+          <mat-option *ngFor="let f of values" [value]="f">{{f}}</mat-option>
+          
+      </mat-select>
+    </mat-form-field>
+    <div mat-dialog-action [align]="'end'">
+      <button mat-raised-button mat-dialog-close (click)="addBookShop()">{{actionBtn}}</button>
+    </div>
+  </form>
+    
+      
+
+</div>

@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Add new BookShop</h1>
+<div mat-dialog-content>
+  <form [formGroup]="productFrom"> 
+    <mat-form-field appearance="outline">
+      <mat-label>Add this book</mat-label>
+      <mat-select formControlName="booknum" placeholder="Category">
+          <mat-option *ngFor="let f of values" [value]="f">{{f.book_id}} {{f.title}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div mat-dialog-action [align]="'end'">
+      <button mat-raised-button mat-dialog-close (click)="saveBook()" >Save</button>
+    </div>
+  </form>
+    
+      
+
+</div>
